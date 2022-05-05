@@ -1,4 +1,4 @@
-
+from decs import log, log_path
 
 class FlatIterator:
 
@@ -20,7 +20,8 @@ class FlatIterator:
                 self.nested_list = next(self.list_iter)
         return self.nested_list[self.cursor]
 
-
+@log
+@log_path(path='logs_path.txt')
 def flat_generator(list):
     # Генератор возвращает элементы из списка с двойным уровнем вложенности
     for sub_list in list:
@@ -53,7 +54,8 @@ class FlatIteratorEnhanced:
             else:  # если элемент не список, возвращаем этот элемент
                 return self.current_element
 
-
+@log
+@log_path(path='logs_path.txt')
 def flat_generator_enhanced(_list):
     for elem in _list:
         if isinstance(elem, list):  # проверяем тип следующего элемента
@@ -68,40 +70,40 @@ if __name__ == '__main__':
         ['d', 'e', 'f', 'h', False],
         [1, 2, None],
     ]
-    print('-'*10)
+    # print('-'*10)
 
-    print('Работа итератора')
-    for item in FlatIterator(nested_list):
-        print(item)
-    print('-' * 10)
+    # print('Работа итератора')
+    # for item in FlatIterator(nested_list):
+    #     print(item)
+    # print('-' * 10)
 
-    print('Работа компрехеншен')
-    flat_list = [item for item in FlatIterator(nested_list)]
-    print(flat_list)
-    print('-' * 10)
-
+    # print('Работа компрехеншен')
+    # flat_list = [item for item in FlatIterator(nested_list)]
+    # print(flat_list)
+    # print('-' * 10)
+    #
     print('Работа генератора')
     for item in flat_generator(nested_list):
         print(item)
     print('-' * 10)
-
+    #
     nested_list = [
         ['a', ['b'], 'c'],
         ['d', 'e', [[[[['f']]]]], 'h', False],
         [1, [[[2]]], None],
     ]
-
-    print('Вызов расширенного итератора')
-    for item in FlatIteratorEnhanced(nested_list):
-        print(item)
-    print('-' * 10)
-
+    #
+    # print('Вызов расширенного итератора')
+    # for item in FlatIteratorEnhanced(nested_list):
+    #     print(item)
+    # print('-' * 10)
+    #
     print('Вызов расширенного генераторра')
     for item in flat_generator_enhanced(nested_list):
         print(item)
     print('-' * 10)
-
-    print('Вызов компрехеншен')
-    flat_list = [item for item in FlatIteratorEnhanced(nested_list)]
-    print(flat_list)
-    print('-' * 30)
+    #
+    # print('Вызов компрехеншен')
+    # flat_list = [item for item in FlatIteratorEnhanced(nested_list)]
+    # print(flat_list)
+    # print('-' * 30)
